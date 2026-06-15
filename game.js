@@ -2,6 +2,7 @@ const Game = {
     canvas: null,
     ctx: null,
     image: null,
+    hero: null,
 
     init() {
         this.canvas = document.createElement("canvas");
@@ -12,7 +13,9 @@ const Game = {
 
         this.ctx = this.canvas.getContext("2d");
 
-        this.loadImage(0);
+        // Создаём героя
+        this.hero = new Hero(this.ctx, CONFIG.images[0]);
+        this.hero.init();
     },
 
     loadImage(index) {

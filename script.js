@@ -1,24 +1,52 @@
 const mainImage = document.getElementById("mainImage");
-const prewBut = document.getElementById("prewBut");
+const prevBut = document.getElementById("prevBut");
 const nextBut = document.getElementById("nextBut");
+const counter = document.getElementById("count");
 
-const images = CONFIG.images; // [] array
-let currentIndex = 1;
+const images = typeof CONFIG !== "undefined" && Array.isArray(CONFIG.images) ? CONFIG.images : [];
+let currentIndex = 0;
 
-function initImage(){
+function updateImage() {
+    if (!images.length) {
+        mainImage.removeAttribute("src");
+        mainImage.alt = "В коллекции пока нет изображений";
+        counter.textContent = "0 / 0";
+        prevBut.disabled = true;
+        nextBut.disabled = true;
+        return;
+    }
+
     mainImage.src = images[currentIndex];
+    mainImage.alt = `Изображение ${currentIndex + 1} из ${images.length}`;
+    counter.textContent = `${currentIndex + 1} / ${images.length}`;
 }
 
-function prewImage(){
-    currentIndex -= 1;
-    initImage();
+function showPrevImage() {
+    if (!images.length) return;
+
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateImage();
 }
 
-function nextImage(){
-    currentIndex += 1;
-    initImage();
+function showNextImage() {
+    if (!images.length) return;
+
+    currentIndex = (currentIndex + 1) % images.length;
+    updateImage();
 }
 
-prewBut.addEventListener('click', prewImage);
-nextBut.addEventListener('click', nextImage);
-initImage();
+prevBut.addEventListener("click", showPrevImage);
+nextBut.addEventListener("click", showNextImage);
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+        showPrevImage();
+    }
+
+    if (event.key === "ArrowRight") {
+        showNextImage();
+    }
+});
+
+updateImage();
+Game.init();

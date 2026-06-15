@@ -3,7 +3,7 @@ const prevBut = document.getElementById("prevBut");
 const nextBut = document.getElementById("nextBut");
 const counter = document.getElementById("count");
 
-const images = typeof CONFIG !== "undefined" && Array.isArray(CONFIG.images) ? CONFIG.images : [];
+const images = Array.isArray(CONFIG.images) ? CONFIG.images : [];
 let currentIndex = 0;
 
 function updateImage() {
@@ -17,20 +17,18 @@ function updateImage() {
     }
 
     mainImage.src = images[currentIndex];
-    mainImage.alt = `Изображение ${currentIndex + 1} из ${images.length}`;
-    counter.textContent = `${currentIndex + 1} / ${images.length}`;
+    mainImage.alt = Изображение ${currentIndex + 1} из ${images.length};
+    counter.textContent = ${currentIndex + 1} / ${images.length};
 }
 
 function showPrevImage() {
     if (!images.length) return;
-
     currentIndex = (currentIndex - 1 + images.length) % images.length;
     updateImage();
 }
 
 function showNextImage() {
     if (!images.length) return;
-
     currentIndex = (currentIndex + 1) % images.length;
     updateImage();
 }
@@ -39,13 +37,8 @@ prevBut.addEventListener("click", showPrevImage);
 nextBut.addEventListener("click", showNextImage);
 
 document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-        showPrevImage();
-    }
-
-    if (event.key === "ArrowRight") {
-        showNextImage();
-    }
+    if (event.key === "ArrowLeft") showPrevImage();
+    if (event.key === "ArrowRight") showNextImage();
 });
 
 updateImage();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +7,24 @@
     <title>Collection</title>
 </head>
 <body>
-    <div class="container" id="mainContainer">
-        <div class="img-container" id="imgContainer">
-            <img src="" id="mainImage" alt="Картинка">
-        </div>
+    <main class="container" id="mainContainer">
+        <section class="gallery-card" aria-label="Галерея изображений">
+            <h1 class="title">Collection</h1>
 
-        <div class="controller-container" id="controllerContainer">
-            <button id="prewBut">⏪</button>
-            <button id="nextBut">⏩</button>
-            <button id="nextBut">⏩</button>
-        </div>
-        <span id="count"></span>
-    </div>
+            <div class="img-container" id="imgContainer">
+                <img src="" id="mainImage" alt="Изображение из коллекции">
+            </div>
 
-    <div class="canvas-container">
-        <canvas id="gameCanvas"></canvas>
-    </div>
+            <div class="controller-container" id="controllerContainer">
+                <button type="button" id="prevBut" aria-label="Предыдущее изображение">⏪</button>
+                <span id="count" class="counter" aria-live="polite"></span>
+                <button type="button" id="nextBut" aria-label="Следующее изображение">⏩</button>
+            </div>
+        </section>
+    </main>
+
     <script src="config.js"></script>
     <script src="script.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
